@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { registerToWaitlist } from '@/api/public';
+import { getCountryCode } from '@/utils/geo';
 
 export const JoinWaitlistPage = () => {
     const [email, setEmail] = useState('');
@@ -8,6 +9,16 @@ export const JoinWaitlistPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [country, setCountry] = useState<string | null>(null);
+
+    // Detect country on mount
+    useEffect(() => {
+        const detectCountry = async () => {
+            const code = await getCountryCode();
+            setCountry(code);
+        };
+        detectCountry();
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -20,6 +31,7 @@ export const JoinWaitlistPage = () => {
                 user_type: userType,
                 product_of_interest: product,
                 source: 'web_registration',
+                country: country || undefined,
             });
             setIsSuccess(true);
         } catch (err: any) {
