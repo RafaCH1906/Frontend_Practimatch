@@ -3,16 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -21,4 +12,45 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  @apply bg-slate-50 text-slate-900;
+}
+
+/* Micro-animations utility */
+@layer utilities {
+  .animate-in {
+    animation-fill-mode: both;
+    animation-duration: 500ms;
+  }
+
+  .fade-in {
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    animation-name: fade-in;
+  }
+
+  .zoom-in-95 {
+    @keyframes zoom-in {
+      from { transform: scale(0.95); }
+      to { transform: scale(1); }
+    }
+    animation-name: zoom-in;
+  }
+
+  .slide-in-from-bottom-4 {
+    @keyframes slide-in-bottom-4 {
+      from { transform: translateY(1rem); }
+      to { transform: translateY(0); }
+    }
+    animation-name: slide-in-bottom-4;
+  }
+
+  .slide-in-from-bottom-8 {
+    @keyframes slide-in-bottom-8 {
+      from { transform: translateY(2rem); }
+      to { transform: translateY(0); }
+    }
+    animation-name: slide-in-bottom-8;
+  }
 }
