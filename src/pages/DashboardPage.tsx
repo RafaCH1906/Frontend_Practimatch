@@ -76,9 +76,9 @@ export const DashboardPage = () => {
                         isLoading={metricsLoading}
                     />
                     <MetricCard
-                        title="Top Country"
-                        value={metrics?.by_country?.[0]?.category || 'Unknown'}
-                        description={`${metrics?.by_country?.[0]?.count || 0} registrations`}
+                        title="Top City"
+                        value={metrics?.by_city?.[0]?.category || 'Unknown'}
+                        description={`${metrics?.by_city?.[0]?.count || 0} registrations`}
                         isLoading={metricsLoading}
                     />
                 </div>

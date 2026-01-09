@@ -63,6 +63,7 @@ export interface MetricsResponse {
     by_user_type: MetricsByCategory[];
     by_source: MetricsByCategory[];
     by_country: MetricsByCategory[];
+    by_city: MetricsByCategory[];
     top_emails: TopEmail[];
     latest_by_type: LatestByType[];
 }

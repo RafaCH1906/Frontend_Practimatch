@@ -34,12 +34,12 @@ export const WaitlistFiltersBar = ({ filters, onFilterChange }: WaitlistFiltersP
             </div>
 
             <div className="w-32">
-                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 px-1">Country</label>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 px-1">City</label>
                 <input
                     type="text"
-                    placeholder="PE, MX..."
-                    value={filters.country || ''}
-                    onChange={(e) => onFilterChange({ country: e.target.value || undefined })}
+                    placeholder="City name..."
+                    value={filters.city || ''}
+                    onChange={(e) => onFilterChange({ city: e.target.value || undefined })}
                     className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
             </div>
