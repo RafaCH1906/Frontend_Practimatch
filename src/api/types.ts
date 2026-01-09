@@ -25,6 +25,9 @@ export interface WaitlistItem {
     registration_count: number;
     source?: string | null;
     country?: string | null;
+    city?: string | null;
+    device_type?: 'mobile' | 'tablet' | 'desktop' | null;
+    traffic_source?: string | null;
     created_at: string;
     updated_at?: string | null;
 }
@@ -71,6 +74,9 @@ export interface WaitlistFilters {
     product_of_interest?: string;
     source?: string;
     country?: string;
+    city?: string;
+    device_type?: string;
+    traffic_source?: string;
     email?: string;
     order_by?: 'created_at_desc' | 'registration_count_desc';
 }

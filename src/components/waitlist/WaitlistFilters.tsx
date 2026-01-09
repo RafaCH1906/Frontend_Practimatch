@@ -33,7 +33,43 @@ export const WaitlistFiltersBar = ({ filters, onFilterChange }: WaitlistFiltersP
                 </select>
             </div>
 
-            <div className="w-48">
+            <div className="w-32">
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 px-1">Country</label>
+                <input
+                    type="text"
+                    placeholder="PE, MX..."
+                    value={filters.country || ''}
+                    onChange={(e) => onFilterChange({ country: e.target.value || undefined })}
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+            </div>
+
+            <div className="w-36">
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 px-1">Device</label>
+                <select
+                    value={filters.device_type || ''}
+                    onChange={(e) => onFilterChange({ device_type: e.target.value || undefined })}
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                    <option value="">All Devices</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="tablet">Tablet</option>
+                    <option value="desktop">Desktop</option>
+                </select>
+            </div>
+
+            <div className="w-40">
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 px-1">Traffic Source</label>
+                <input
+                    type="text"
+                    placeholder="Source..."
+                    value={filters.traffic_source || ''}
+                    onChange={(e) => onFilterChange({ traffic_source: e.target.value || undefined })}
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+            </div>
+
+            <div className="w-40">
                 <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 px-1">Sort By</label>
                 <select
                     value={filters.order_by || 'created_at_desc'}
@@ -46,8 +82,15 @@ export const WaitlistFiltersBar = ({ filters, onFilterChange }: WaitlistFiltersP
             </div>
 
             <button
-                onClick={() => onFilterChange({ email: '', user_type: undefined, order_by: 'created_at_desc' })}
-                className="px-4 py-2 text-sm text-gray-500 hover:text-indigo-600 font-medium transition-colors mb-0.5"
+                onClick={() => onFilterChange({
+                    email: '',
+                    user_type: undefined,
+                    country: undefined,
+                    device_type: undefined,
+                    traffic_source: undefined,
+                    order_by: 'created_at_desc'
+                })}
+                className="px-4 py-2 text-sm text-gray-400 hover:text-indigo-600 font-medium transition-colors mb-0.5"
             >
                 Clear
             </button>
