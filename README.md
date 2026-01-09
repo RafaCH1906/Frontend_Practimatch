@@ -1,55 +1,72 @@
-# Practimatch Frontend - Quick Start
+# PractiMatch Frontend - Dashboard & Landing Page
 
-Este proyecto es un frontend React + TypeScript + Vite configurado para conectarse al backend FastAPI de Practimatch.
+Este proyecto es una aplicación frontend profesional construida con **React, TypeScript y Vite**, diseñada para gestionar la waitlist de PractiMatch. Incluye una landing page pública premium y un panel administrativo robusto.
 
-## 🚀 Instalación y Ejecución
+## 🚀 Inicio Rápido
 
+### Requisitos Previos
+- npm o yarn
+- Backend FastAPI corriendo en `http://localhost:8000`
+
+### Instalación
 ```bash
-# Instalar dependencias (ya instaladas)
+# Clonar el repositorio e instalar dependencias
+# (Las dependencias ya están listas en este entorno)
 npm install
-
-# Desarrollo
-npm run dev
-# Abre: http://localhost:5173
-
-# Build producción
-npm run build
 ```
 
-## ⚙️ Configuración
-
-Edita `.env.local` con la URL de tu backend:
-
+### Desarrollo
 ```bash
+# Iniciar servidor de desarrollo
+npm run dev
+# Acceso: http://localhost:5173
+```
+
+### Producción
+```bash
+# Generar build optimizado
+npm run build
+# Los archivos se generarán en la carpeta /dist
+```
+
+## ⚙️ Configuración (.env)
+
+El proyecto utiliza variables de entorno para conectarse al backend. Asegúrate de tener un archivo `.env.local` con:
+
+```env
 VITE_API_URL=http://localhost:8000
 ```
 
-## 📁 Estructura del Proyecto
+## 🛠️ Arquitectura y Estructura
 
-```
-src/
-├── api/          # Servicios API (auth, admin)
-├── auth/         # Autenticación (Context, PrivateRoute)
-├── components/   # Componentes reutilizables
-├── config/       # Configuración (axios, constants)
-├── hooks/        # Hooks personalizados
-├── layouts/      # Layouts (MainLayout)
-├── pages/        # Páginas (Login, Dashboard)
-├── App.tsx       # Router principal
-└── main.tsx      # Entry point
-```
+El proyecto sigue una arquitectura modular y desacoplada:
 
-## 🔑 Características Implementadas
+- **`src/api/`**: Contiene la definición de tipos (`types.ts`) y servicios para interactuar con la API (auth, admin, public).
+- **`src/auth/`**: Gestión de autenticación mediante Context API y protección de rutas (`PrivateRoute`).
+- **`src/components/`**: Componentes reutilizables organized by domain (common, waitlist).
+- **`src/hooks/`**: Lógica de negocio extraída en hooks personalizados (`useWaitlist`, `useMetrics`).
+- **`src/pages/`**: Vistas principales de la aplicación.
+- **`src/config/`**: Configuración centralizada de Axios e interceptores.
 
-- ✅ Login funcional (POST /api/auth/login)
-- ✅ Token JWT en localStorage
-- ✅ Validación de sesión (GET /api/auth/me)
-- ✅ Rutas protegidas con PrivateRoute
-- ✅ Dashboard consumiendo GET /api/admin/metrics
-- ✅ Interceptores Axios:
-  - Auth token automático
-  - Logout automático en 401
+## ✨ Características Principales
 
-## 📚 Documentación Completa
+### 1. Landing Page Pública (`/`)
+- Diseño **Premium Dark Theme** enfocado en conversiones.
+- Formulario de registro directo a la waitlist.
+- Feedback visual de éxito y validaciones en tiempo real.
 
-Revisa el archivo [walkthrough.md](file:///C:/Users/PC/.gemini/antigravity/brain/6491f3de-c47b-48b0-8aff-5fa9ff3779af/walkthrough.md) para más detalles.
+### 2. Dashboard Administrativo (`/dashboard`)
+- **Métricas UX:** Cards con datos agregados (Total registros, fuentes, países).
+- **Gestión de Waitlist:**
+  - Tabla performante con **Paginación** real.
+  - **Filtros Avanzados:** Por tipo de usuario, fuente, país.
+  - **Búsqueda:** Filtro por email en tiempo real.
+- **Protección JWT:** Sesión segura con redirección automática en caso de expiración (401).
+
+## 🔒 Seguridad
+- Interceptores de Axios para adjuntar automáticamente el token `Bearer`.
+- Manejo centralizado de errores de autenticación.
+- Rutas privadas que requieren login de administrador.
+
+---
+*Desarrollado con estándares de Senior Frontend Engineer enfocado en UX y Escalabilidad.*

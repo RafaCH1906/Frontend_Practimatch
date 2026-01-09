@@ -1,37 +1,25 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from '@/auth/AuthContext';
+import { AuthProvider } from '@/auth/AuthContext';
 import { PrivateRoute } from '@/auth/PrivateRoute';
 import { LoginPage } from '@/pages/LoginPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { ROUTES } from '@/config/constants';
 
-// Root redirect component
-const RootRedirect = () => {
-    const { isAuthenticated, isLoading } = useAuth();
-
-    if (isLoading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-lg">Loading...</div>
-            </div>
-        );
-    }
-
-    return (
-        <Navigate
-            to={isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN}
-            replace
-        />
-    );
-};
+import { JoinWaitlistPage } from '@/pages/JoinWaitlistPage';
 
 function App() {
     return (
         <BrowserRouter>
             <AuthProvider>
                 <Routes>
-                    <Route path={ROUTES.HOME} element={<RootRedirect />} />
+                    {/* Public Landing & Registration */}
+                    <Route path={ROUTES.HOME} element={<JoinWaitlistPage />} />
+                    <Route path={ROUTES.JOIN} element={<JoinWaitlistPage />} />
+
+                    {/* Admin Auth */}
                     <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+
+                    {/* Admin Dashboard */}
                     <Route
                         path={ROUTES.DASHBOARD}
                         element={
@@ -40,6 +28,9 @@ function App() {
                             </PrivateRoute>
                         }
                     />
+
+                    {/* Fallback to landing */}
+                    <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

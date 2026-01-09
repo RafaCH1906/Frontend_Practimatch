@@ -15,6 +15,10 @@ export const API_ENDPOINTS = {
     },
     ADMIN: {
         METRICS: '/api/admin/metrics',
+        WAITLIST: '/api/admin/waitlist',
+    },
+    PUBLIC: {
+        WAITLIST: '/api/waitlist',
     },
 } as const;
 
@@ -23,4 +27,5 @@ export const ROUTES = {
     LOGIN: '/login',
     DASHBOARD: '/dashboard',
     HOME: '/',
+    JOIN: '/join',
 } as const;
