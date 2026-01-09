@@ -1,70 +1,83 @@
 # PractiMatch Frontend - Dashboard & Landing Page
 
-Este proyecto es una aplicación frontend profesional construida con **React, TypeScript y Vite**, diseñada para gestionar la waitlist de PractiMatch. Incluye una landing page pública premium y un panel administrativo robusto.
+![Practimatch Preview](file:///C:/Users/PC/.gemini/antigravity/brain/288a310c-f370-4bd4-96cb-181c012ba1e8/landing_page_preview.png)
+
+Este proyecto es una aplicación frontend profesional diseñada para gestionar la waitlist de PractiMatch. Incluye una landing page pública premium de alta conversión y un panel administrativo robusto con analíticas avanzadas.
+
+🌍 **App en Producción:** [https://frontend-practimatch.onrender.com](https://frontend-practimatch.onrender.com)
+
+---
 
 ## 🚀 Inicio Rápido
 
 ### Requisitos Previos
-- npm o yarn
-- Node.js (v18+)
+- **Node.js**: v18 o superior
+- **Gestor de paquetes**: npm o yarn
 
-### Instalación
+### Instalación Local
 ```bash
-# Clonar el repositorio e instalar dependencias
-# (Las dependencias ya están listas en este entorno)
+# 1. Clonar repositorio (si aplica) e instalar dependencias
 npm install
-```
 
-### Desarrollo
-```bash
-# Iniciar servidor de desarrollo
+# 2. Configurar variables de entorno (ver sección ⚙️)
+cp .env.example .env.local
+
+# 3. Iniciar servidor de desarrollo
 npm run dev
-# Acceso: http://localhost:5173
 ```
+Acceso local: `http://localhost:5173`
 
-### Producción
-```bash
-# Generar build optimizado
-npm run build
-# Los archivos se generarán en la carpeta /dist
-```
+---
+
+## 🛠️ Stack Tecnológico
+- **Core**: React 18 + TypeScript
+- **Bundler**: Vite 6
+- **Estilos**: Tailwind CSS (Eética Premium & Dark Mode)
+- **API**: Axios con interceptores personalizados
+- **Routing**: React Router 6
+- **Analytics**: Tracking nativo (UTMs, Browser, Device, Geo)
+
+---
 
 ## ⚙️ Configuración (.env)
 
-El proyecto utiliza variables de entorno para conectarse al backend. Asegúrate de configurar:
+El proyecto utiliza variables de entorno para conectarse al backend. Asegúrate de tener:
 
 ```env
 VITE_API_BASE_URL=https://dashboard-practimatch.onrender.com
 ```
 
-## 🛠️ Arquitectura y Estructura
+---
 
-El proyecto sigue una arquitectura modular y desacoplada:
+## 🛠️ Arquitectura
+- **`src/api/`**: Definición de tipos y servicios (FastAPI compatible).
+- **`src/auth/`**: Gestión de sesión JWT y `PrivateRoute`.
+- **`src/utils/tracking.ts`**: Lógica avanzada de analítica y atribución.
+- **`src/pages/`**: Vistas modulares (Landing, Login, Dashboard).
+- **`render.yaml`**: Infraestructura como código para despliegue automatizado.
 
-- **`src/api/`**: Contiene la definición de tipos (`types.ts`) y servicios para interactuar con la API (auth, admin, public).
-- **`src/auth/`**: Gestión de autenticación mediante Context API y protección de rutas (`PrivateRoute`).
-- **`src/components/`**: Componentes reutilizables organized by domain (common, waitlist).
-- **`src/hooks/`**: Lógica de negocio extraída en hooks personalizados (`useWaitlist`, `useMetrics`).
-- **`src/pages/`**: Vistas principales de la aplicación.
-- **`src/config/`**: Configuración centralizada de Axios e interceptores.
+---
 
 ## ✨ Características Principales
 
-### 1. Landing Page Pública (`/`)
-- Diseño **Premium Dark Theme** enfocado en conversiones.
-- Formulario de registro directo a la waitlist.
-- Feedback visual de éxito y validaciones en tiempo real.
+### 1. Landing Page Pública
+- Detección automática de **País y Ciudad** (vía ipapi.co).
+- Atribución de marketing automática (lectura de **UTMs**).
+- Detección de **Navegador y Dispositivo** (Mobile/Tablet/Desktop).
 
-### 2. Dashboard Administrativo (`/dashboard`)
-- **Métricas UX:** Cards con datos agregados (Total registros, fuentes, países).
-- **Gestión de Waitlist:**
-  - Tabla performante con **Paginación** real.
-  - **Filtros Avanzados:** Por tipo de usuario, fuente, país.
-  - **Búsqueda:** Filtro por email en tiempo real.
-- **Protección JWT:** Sesión segura con redirección automática en caso de expiración (401).
+### 2. Dashboard Administrativo
+- **Métricas UX:** Visualización de registros agrupados por fuente y país.
+- **Seguridad:** Protección de rutas y manejo proactivo de expiración de sesión (401).
 
-## 🔒 Seguridad
-- Interceptores de Axios para adjuntar automáticamente el token `Bearer`.
-- Manejo centralizado de errores de autenticación.
-- Rutas privadas que requieren login de administrador.
+---
 
+## 📦 Despliegue en Render
+
+El proyecto está configurado para desplegarse automáticamente mediante el archivo `render.yaml` (Render Blueprint):
+
+1. En Render, selecciona **New > Blueprint**.
+2. Conecta este repositorio.
+3. Render detectará el servicio `frontend-practimatch` y aplicará la configuración de **Static Site**, incluyendo el **SPA Fallback** (redirección de `/*` a `index.html`).
+
+---
+*Desarrollado con estándares de Senior Frontend Engineer enfocado en UX, Escalabilidad y Product Analytics.*
