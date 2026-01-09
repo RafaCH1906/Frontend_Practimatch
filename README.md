@@ -6,7 +6,7 @@ Este proyecto es una aplicación frontend profesional construida con **React, Ty
 
 ### Requisitos Previos
 - npm o yarn
-- Backend FastAPI corriendo en `http://localhost:8000`
+- Node.js (v18+)
 
 ### Instalación
 ```bash
@@ -31,10 +31,10 @@ npm run build
 
 ## ⚙️ Configuración (.env)
 
-El proyecto utiliza variables de entorno para conectarse al backend. Asegúrate de tener un archivo `.env.local` con:
+El proyecto utiliza variables de entorno para conectarse al backend. Asegúrate de configurar:
 
 ```env
-VITE_API_URL=http://localhost:8000
+VITE_API_BASE_URL=https://dashboard-practimatch.onrender.com
 ```
 
 ## 🛠️ Arquitectura y Estructura
@@ -67,6 +67,28 @@ El proyecto sigue una arquitectura modular y desacoplada:
 - Interceptores de Axios para adjuntar automáticamente el token `Bearer`.
 - Manejo centralizado de errores de autenticación.
 - Rutas privadas que requieren login de administrador.
+
+
+## 🚀 Deploy Frontend en Render
+
+El proyecto incluye un archivo `render.yaml` que automatiza la configuración del despliegue.
+
+### Pasos para el primer deploy:
+1. **Conectar Repositorio:** En el dashboard de Render, selecciona **New > Blueprint**.
+2. **Conectar GitHub:** Selecciona el repositorio de este proyecto.
+3. **Confirmar Plan:** Render detectará automáticamente el servicio `frontend-practimatch` definido en `render.yaml`.
+4. **Deploy:** Haz clic en **Apply**.
+
+### Beneficios del archivo render.yaml:
+- **Build Automático:** Ejecuta `npm install && npm run build`.
+- **Publish Path:** Sirve automáticamente la carpeta `dist`.
+- **SPA Fallback:** Configura automáticamente las reescrituras de rutas para que React Router funcione correctamente (Redirección de `/*` a `/index.html`).
+- **Variables de Entorno:** Preconfigura `VITE_API_BASE_URL`.
+
+### Verificación Final
+- La página debe cargar el diseño premium.
+- El formulario de Waitlist debe enviar datos al backend de Render.
+- El Dashboard debe mostrar métricas reales tras el login.
 
 ---
 *Desarrollado con estándares de Senior Frontend Engineer enfocado en UX y Escalabilidad.*
