@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { registerToWaitlist } from '@/api/public';
-import { getCountryCode } from '@/utils/geo';
-import { getDeviceType } from '@/utils/device';
+import { getTrackingMetadata, TrackingMetadata } from '@/utils/tracking';
 
 export const JoinWaitlistPage = () => {
     const [email, setEmail] = useState('');
@@ -10,19 +9,15 @@ export const JoinWaitlistPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [country, setCountry] = useState<string | null>(null);
-    const [deviceType, setDeviceType] = useState<string>('unknown');
+    const [tracking, setTracking] = useState<TrackingMetadata | null>(null);
 
-    // Detect country and device on mount
+    // Detect all tracking metadata on mount
     useEffect(() => {
-        const detectMetadata = async () => {
-            const code = await getCountryCode();
-            setCountry(code);
-
-            const device = getDeviceType();
-            setDeviceType(device);
+        const initTracking = async () => {
+            const data = await getTrackingMetadata();
+            setTracking(data);
         };
-        detectMetadata();
+        initTracking();
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -35,9 +30,14 @@ export const JoinWaitlistPage = () => {
                 email,
                 user_type: userType,
                 product_of_interest: product,
-                source: 'web_registration',
-                country: country || undefined,
-                device_type: deviceType,
+                ...tracking || {
+                    source: 'direct',
+                    channel: 'web',
+                    device_type: 'desktop',
+                    browser: 'other',
+                    country: 'Unknown',
+                    city: 'Unknown'
+                }
             });
             setIsSuccess(true);
         } catch (err: any) {

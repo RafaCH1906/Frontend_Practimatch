@@ -6,8 +6,13 @@ interface WaitlistCreate {
     user_type: string;
     product_of_interest: string;
     source?: string;
+    channel?: string;
+    campaign?: string;
     country?: string;
+    city?: string;
+    region?: string;
     device_type?: string;
+    browser?: string;
 }
 
 /**
