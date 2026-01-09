@@ -7,6 +7,7 @@ interface WaitlistCreate {
     product_of_interest: string;
     source?: string;
     country?: string;
+    device_type?: string;
 }
 
 /**
