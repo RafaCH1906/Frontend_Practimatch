@@ -10,6 +10,7 @@ export const JoinWaitlistPage = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [tracking, setTracking] = useState<TrackingMetadata | null>(null);
+    const [trafficSourceExplicit, setTrafficSourceExplicit] = useState('');
 
     // Detect all tracking metadata on mount
     useEffect(() => {
@@ -37,7 +38,8 @@ export const JoinWaitlistPage = () => {
                     browser: 'other',
                     country: 'Unknown',
                     city: 'Unknown'
-                }
+                },
+                ...(trafficSourceExplicit ? { traffic_source_explicit: trafficSourceExplicit } : {})
             });
             setIsSuccess(true);
         } catch (err: any) {
@@ -138,6 +140,24 @@ export const JoinWaitlistPage = () => {
                                     <option value="University Partners">University Partners</option>
                                 </select>
                             </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-semibold text-slate-300 ml-1">How did you hear about us? (Optional)</label>
+                            <select
+                                value={trafficSourceExplicit}
+                                onChange={(e) => setTrafficSourceExplicit(e.target.value)}
+                                className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer"
+                            >
+                                <option value="">Select an option</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="google">Google</option>
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
 
                         {error && (

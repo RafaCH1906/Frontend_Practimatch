@@ -13,6 +13,7 @@ interface WaitlistCreate {
     region?: string;
     device_type?: string;
     browser?: string;
+    traffic_source_explicit?: string;
 }
 
 /**

@@ -28,6 +28,7 @@ export interface WaitlistItem {
     city?: string | null;
     device_type?: 'mobile' | 'tablet' | 'desktop' | null;
     traffic_source?: string | null;
+    traffic_source_explicit?: string | null;
     created_at: string;
     updated_at?: string | null;
 }
@@ -78,6 +79,7 @@ export interface WaitlistFilters {
     city?: string;
     device_type?: string;
     traffic_source?: string;
+    traffic_source_explicit?: string;
     email?: string;
     order_by?: 'created_at_desc' | 'registration_count_desc';
 }
